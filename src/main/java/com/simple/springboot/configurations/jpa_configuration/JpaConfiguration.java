@@ -1,4 +1,4 @@
-package com.simple.springboot.configurations;
+package com.simple.springboot.configurations.jpa_configuration;
  
 import java.util.Properties;
  

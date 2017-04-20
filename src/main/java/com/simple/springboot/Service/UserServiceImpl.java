@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.simple.springboot.Repositories.UserRepository;
@@ -17,15 +19,19 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public User findById(Long id) {
 		return userRepository.findOne(id);
 	}
 	
-	public User findByName(String name) {
-		return userRepository.findByName(name);
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 	
 	public void saveUser(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 	}
 	
@@ -47,6 +53,12 @@ public class UserServiceImpl implements UserService {
 	
 	public boolean isUserExist(User user) {
 		return findByName(user.getName()) != null;
+	}
+
+	@Override
+	public User findByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

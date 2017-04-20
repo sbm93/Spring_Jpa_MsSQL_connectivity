@@ -6,38 +6,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="Users")
+@Table(name = "user")
 public class User {
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotEmpty
-	@Column(name="Name")
+	@Column(name = "Name")
 	private String name;
-	
-	@Column(name="Age")
-	private int age;
-	
-	@Column(name="salary")
-	private int salary;
-	
-	public User() {
-		// TODO Auto-generated constructor stub
-	}
-	public User(Long id, String name, int age, int salary) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.salary = salary;
-	}
-	
+
+	@NotEmpty
+	@Column(name = "Email")
+	private String email;
+
+	@Column(name = "role")
+	private String role = "USER";
+
+	@NotEmpty
+	@Column
+	private String mobile;
+
+	@NotEmpty
+	private String password;
+
+	@Transient
+	private String confirmPassword;
+
 	public Long getId() {
 		return id;
 	}
@@ -54,25 +54,40 @@ public class User {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getSalary() {
-		return salary;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSalary(int salary) {
-		this.salary = salary;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", age=" + age + ", salary=" + salary + "]";
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
-	
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }
