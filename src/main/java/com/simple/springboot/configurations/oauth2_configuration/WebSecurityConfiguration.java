@@ -42,11 +42,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
         .authorizeRequests()
-            .antMatchers("/registration/").permitAll()
+            .antMatchers("/api/registration/").permitAll()
             .anyRequest().authenticated()
             .and()
         .formLogin()
-            .loginPage("/login/")
+            .loginPage("/api/login/")
             .permitAll()
             .and()
         .logout()
